@@ -4,6 +4,18 @@ networks:
   prodnetwork:
     driver: bridge
 
+volumes:
+  ci-tool-stack_jenkins:
+    driver: local
+  ci-tool-stack_postgres:
+    driver: local
+  ci-tool-stack_gitlab_config:
+    driver: local
+  ci-tool-stack_gitlab_logs:
+    driver: local
+  ci-tool-stack_gitlab_data:
+    driver: local
+
 services:
  nexus:
   build: ./nexus
@@ -20,8 +32,7 @@ services:
     - prodnetwork
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    - /usr/local/bin/docker:/usr/bin/docker
-    - /opt/jenkins/:/var/lib/jenkins/
+    - ci-tool-stack_jenkins:/var/lib/jenkins/
   depends_on:
     - nexus
     - gitlab
@@ -52,7 +63,7 @@ services:
    - POSTGRES_USER=sonar
    - POSTGRES_PASSWORD=sonar
   volumes:
-    - /opt/postgres/data:/var/lib/postgresql/data
+    - ci-tool-stack_postgres:/var/lib/postgresql/data
 
  gitlab:
   image: gitlab/gitlab-ce:8.14.4-ce.0
@@ -68,6 +79,6 @@ services:
     - "443:443"
     - "2222:22"
   volumes:
-    - /opt/gitlab/config:/etc/gitlab
-    - /opt/gitlab/logs:/var/log/gitlab
-    - /opt/gitlab/data:/var/opt/gitlab
+    - ci-tool-stack_gitlab_config:/etc/gitlab
+    - ci-tool-stack_gitlab_logs:/var/log/gitlab
+    - ci-tool-stack_gitlab_data:/var/opt/gitlab
