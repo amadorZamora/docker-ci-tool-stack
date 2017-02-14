@@ -46,7 +46,7 @@ services:
   build: ./sonar
   ports:
    - "19000:9000"
-   - "5432:5432"
+   - "15432:5432"
   networks:
     - prodnetwork
   depends_on:
@@ -75,9 +75,9 @@ services:
       # external_url 'https://gitlab.example.com'
       # Add any other gitlab.rb configuration here, each on its own line
   ports:
-    - "80:80"
-    - "443:443"
-    - "2222:22"
+    - "17080:80"
+    - "17443:443"
+    - "12222:22"
   volumes:
     - ci-tool-stack_gitlab_config:/etc/gitlab
     - ci-tool-stack_gitlab_logs:/var/log/gitlab
