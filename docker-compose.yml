@@ -7,8 +7,8 @@ networks:
 volumes:
   ci-tool-stack_jenkins:
     driver: local
-  ci-tool-stack_postgres:
-    driver: local
+#  ci-tool-stack_postgres:
+#    driver: local
   ci-tool-stack_gitlab_config:
     driver: local
   ci-tool-stack_gitlab_logs:
@@ -36,34 +36,34 @@ services:
   depends_on:
     - nexus
     - gitlab
-    - sonar
+#    - sonar
   environment:
     - NEXUS_PORT=8081
     - SONAR_PORT=9000
     - SONAR_DB_PORT=5432
 
- sonar:
-  build: ./sonar
-  ports:
-   - "19000:9000"
-   - "15432:5432"
-  networks:
-    - prodnetwork
-  depends_on:
-    - sonardb
-  environment:
-   - SONARQUBE_JDBC_URL=jdbc:postgresql://sonardb:5432/sonar
-   - SONARQUBE_JDBC_USERNAME=sonar
-   - SONARQUBE_JDBC_PASSWORD=sonar
- sonardb:
-  networks:
-    - prodnetwork
-  image: postgres
-  environment:
-   - POSTGRES_USER=sonar
-   - POSTGRES_PASSWORD=sonar
-  volumes:
-    - ci-tool-stack_postgres:/var/lib/postgresql/data
+# sonar:
+#  build: ./sonar
+#  ports:
+#   - "19000:9000"
+#   - "15432:5432"
+#  networks:
+#    - prodnetwork
+#  depends_on:
+#    - sonardb
+#  environment:
+#   - SONARQUBE_JDBC_URL=jdbc:postgresql://sonardb:5432/sonar
+#   - SONARQUBE_JDBC_USERNAME=sonar
+#   - SONARQUBE_JDBC_PASSWORD=sonar
+# sonardb:
+#  networks:
+#    - prodnetwork
+#  image: postgres
+#  environment:
+#   - POSTGRES_USER=sonar
+#   - POSTGRES_PASSWORD=sonar
+#  volumes:
+#    - ci-tool-stack_postgres:/var/lib/postgresql/data
 
  gitlab:
   image: gitlab/gitlab-ce:8.14.4-ce.0
