@@ -80,6 +80,6 @@ services:
     - prodnetwork
   ports:
     - "17080:8080"
-    - "17222:29418"
+    - "17222:17222"
   volumes:
     - ci-tool-stack_gitbucket:/gitbucket
