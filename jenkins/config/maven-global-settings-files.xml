@@ -26,21 +26,6 @@
     &lt;/servers&gt;
     &lt;profiles&gt;
       &lt;profile&gt;
-          &lt;id&gt;sonar&lt;/id&gt;
-          &lt;activation&gt;
-              &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
-          &lt;/activation&gt;
-          &lt;properties&gt;
-              &lt;sonar.jdbc.url&gt;
-                jdbc:postgresql://sonardb:5432/sonar
-              &lt;/sonar.jdbc.url&gt;
-              &lt;sonar.jdbc.username&gt;sonar&lt;/sonar.jdbc.username&gt;
-              &lt;sonar.jdbc.password&gt;sonar&lt;/sonar.jdbc.password&gt;
-              &lt;!-- Optional URL to server. Default value is http://localhost:9000 --&gt;
-              &lt;sonar.host.url&gt;http://sonar:9000&lt;/sonar.host.url&gt;
-          &lt;/properties&gt;
-      &lt;/profile&gt;
-      &lt;profile&gt;
       &lt;id&gt;nexus&lt;/id&gt;
       &lt;!--Enable snapshots for the built in central repo to direct --&gt;
       &lt;!--all requests to nexus via the mirror --&gt;
