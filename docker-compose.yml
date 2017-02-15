@@ -11,12 +11,12 @@ volumes:
     driver: local
 #  ci-tool-stack_postgres:
 #    driver: local
-  ci-tool-stack_gitlab_config:
-    driver: local
-  ci-tool-stack_gitlab_logs:
-    driver: local
-  ci-tool-stack_gitlab_data:
-    driver: local
+#  ci-tool-stack_gitlab_config:
+#    driver: local
+#  ci-tool-stack_gitlab_logs:
+#    driver: local
+#  ci-tool-stack_gitlab_data:
+#    driver: local
 
 services:
  nexus:
@@ -42,7 +42,7 @@ services:
     - ci-tool-stack_jenkins:/var/lib/jenkins/
   depends_on:
     - nexus
-    - gitlab
+#    - gitlab
 #    - sonar
   environment:
     - NEXUS_PORT=8081
@@ -72,20 +72,20 @@ services:
 #  volumes:
 #    - ci-tool-stack_postgres:/var/lib/postgresql/data
 
- gitlab:
-  image: gitlab/gitlab-ce:8.14.4-ce.0
-  restart: always
-  networks:
-    - prodnetwork
-  environment:
-    GITLAB_OMNIBUS_CONFIG: |
-      # external_url 'https://gitlab.example.com'
-      # Add any other gitlab.rb configuration here, each on its own line
-  ports:
-    - "17080:80"
-    - "17443:443"
-    - "12222:22"
-  volumes:
-    - ci-tool-stack_gitlab_config:/etc/gitlab
-    - ci-tool-stack_gitlab_logs:/var/log/gitlab
-    - ci-tool-stack_gitlab_data:/var/opt/gitlab
+# gitlab:
+#  image: gitlab/gitlab-ce:8.14.4-ce.0
+#  restart: always
+#  networks:
+#    - prodnetwork
+#  environment:
+#    GITLAB_OMNIBUS_CONFIG: |
+#      # external_url 'https://gitlab.example.com'
+#      # Add any other gitlab.rb configuration here, each on its own line
+#  ports:
+#    - "17080:80"
+#    - "17443:443"
+#    - "12222:22"
+#  volumes:
+#    - ci-tool-stack_gitlab_config:/etc/gitlab
+#    - ci-tool-stack_gitlab_logs:/var/log/gitlab
+#    - ci-tool-stack_gitlab_data:/var/opt/gitlab
