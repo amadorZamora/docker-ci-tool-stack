@@ -11,6 +11,8 @@ services:
     - "18081:8081"
   networks:
     - prodnetwork
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
 
  jenkins:
   build: ./jenkins
@@ -20,8 +22,9 @@ services:
     - prodnetwork
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    - /usr/local/bin/docker:/usr/bin/docker
-    - ~/volumenes/jenkins/:/var/lib/jenkins/
+    - /usr/bin/docker:/usr/bin/docker
+    - ~/volumes/jenkins/:/var/lib/jenkins/
+    - /etc/localtime:/etc/localtime:ro
   depends_on:
     - nexus
     - gitlab
@@ -52,7 +55,8 @@ services:
    - POSTGRES_USER=sonar
    - POSTGRES_PASSWORD=sonar
   volumes:
-    - ~/volumenes/postgres/data:/var/lib/postgresql/data
+    - ~/volumes/postgres/data:/var/lib/postgresql/data
+    - /etc/localtime:/etc/localtime:ro
 
  gitlab:
   image: gitlab/gitlab-ce:8.14.4-ce.0
@@ -68,6 +72,7 @@ services:
     - "443:443"
     - "2222:22"
   volumes:
-    - ~/volumenes/gitlab/config:/etc/gitlab
-    - ~/volumenes/gitlab/logs:/var/log/gitlab
-    - ~/volumenes/gitlab/data:/var/opt/gitlab
+    - ~/volumes/gitlab/config:/etc/gitlab
+    - ~/volumes/gitlab/logs:/var/log/gitlab
+    - ~/volumes/gitlab/data:/var/opt/gitlab
+    - /etc/localtime:/etc/localtime:ro
