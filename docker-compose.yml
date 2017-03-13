@@ -23,7 +23,7 @@ services:
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /usr/bin/docker:/usr/bin/docker
-    - ~/volumes/jenkins/:/var/lib/jenkins/
+    - ~/volumes/jenkins/:/var/jenkins_home
     - /etc/localtime:/etc/localtime:ro
   depends_on:
     - nexus
